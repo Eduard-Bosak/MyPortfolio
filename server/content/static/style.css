@@ -1,0 +1,683 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #007aff;
+  --secondary-color: #5856d6; /* Added secondary color for variety */
+  --text-color: #1c1c1e;
+  --text-light: #6e6e73;
+  --bg-color: #fff;
+  --bg-alt-color: #f5f5f7;
+  --card-bg-color: #fff;
+  --border-color: #e0e0e0;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --radius: 14px;
+  --shadow: 0 6px 16px rgba(0,0,0,0.06);
+  --transition: 0.3s ease;
+  --max-width: 1100px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+ scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: 18px; /* Base font size */
+  color: var(--text-color);
+  background: var(--bg-color);
+  line-height: 1.7;
+  transition: background-color var(--transition), color var(--transition); /* Smooth theme transition */
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.6em; /* Consistent heading margin */
+  color: var(--text-color); /* Ensure headings inherit theme color */
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem); /* Responsive H1 */
+}
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem); /* Responsive H2 */
+  margin-bottom: 1.5em;
+  text-align: center; /* Center section titles */
+}
+h3 {
+  font-size: clamp(1.2rem, 3vw, 1.6rem); /* Responsive H3 */
+  margin-bottom: 0.8em;
+   color: var(--primary-color); /* Accent color for H3 */
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+ul {
+    list-style: none; /* Remove default list styles */
+    padding-left: 0;
+}
+
+/* Header */
+.site-header {
+  position: fixed;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.85); /* Slightly less opaque */
+  backdrop-filter: blur(12px); /* Increased blur */
+  height: 65px; /* Slightly taller header */
+  z-index: 1000;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+.site-header.scrolled {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* Enhanced shadow on scroll */
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-color);
+  text-decoration: none;
+   transition: color var(--transition);
+}
+
+.main-navigation ul {
+  display: flex;
+  gap: 28px; /* Increased gap */
+}
+.main-navigation a {
+  color: var(--text-color);
+  position: relative;
+  padding: 5px 0; /* Add padding for larger click area */
+  font-weight: 500; /* Slightly bolder nav links */
+   transition: color var(--transition);
+}
+.main-navigation a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; /* Underline position */
+  left: 0;
+  height: 2px;
+  background: var(--primary-color);
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: center; /* Animate from center */
+  transition: transform var(--transition);
+}
+.main-navigation a:hover::after,
+.main-navigation a.active::after { /* Style for active link */
+  transform: scaleX(1);
+}
+
+/* Sections */
+.content-section {
+  padding: 80px 0; /* Slightly reduced padding */
+}
+.alt-bg {
+  background: var(--bg-alt-color);
+   transition: background-color var(--transition);
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative; /* Добавляем для правильного позиционирования частиц */
+  min-height: 100vh;
+  padding-top: 65px; /* Match header height */
+  background: linear-gradient(135deg, #e2ebf0 0%, #cfd9df 100%); /* Softer gradient */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden; /* Prevent animation overflow */
+}
+.hero-content {
+    max-width: 800px; /* Limit content width */
+}
+.subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem); /* Responsive subtitle */
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto 1em;
+   transition: color var(--transition);
+}
+.subtitle-small {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: var(--text-light);
+    margin: 0.5em auto 1.5em;
+    max-width: 500px;
+     transition: color var(--transition);
+}
+.hero-actions {
+  margin-top: 2.5em;
+  display: flex;
+  flex-wrap: wrap; /* Allow buttons to wrap on small screens */
+  justify-content: center;
+  gap: 15px; /* Reduced gap */
+}
+.cta-button {
+  padding: 14px 35px; /* Larger buttons */
+  background: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all var(--transition);
+  border: 2px solid transparent; /* Prepare for secondary style */
+}
+.cta-button:hover {
+  background: var(--secondary-color);
+  transform: translateY(-3px) scale(1.03); /* More noticeable hover */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+.cta-button.secondary {
+    background: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.cta-button.secondary:hover {
+    background: var(--primary-color);
+    color: white;
+     box-shadow: 0 8px 15px rgba(0, 122, 255, 0.2);
+}
+
+
+/* About Section */
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    text-align: left; /* Align text left */
+}
+.about-text {
+    flex: 1;
+}
+.profile-picture {
+    width: 200px; /* Adjust as needed */
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: var(--shadow);
+}
+
+/* Skills Section */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 30px;
+    text-align: left;
+}
+.skill-category ul {
+    padding-left: 20px; /* Indent skill list */
+    list-style: disc; /* Use standard bullets */
+    margin-top: 0.5em;
+}
+.skill-category li {
+    margin-bottom: 0.5em;
+    font-size: 1rem; /* Slightly smaller skill items */
+     color: var(--text-light);
+      transition: color var(--transition);
+}
+
+/* Experience Section */
+.experience-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Space between job entries */
+}
+.experience-item {
+    text-align: left;
+}
+.experience-meta {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1.5em;
+     transition: color var(--transition);
+}
+.experience-meta strong {
+    color: var(--text-color);
+     transition: color var(--transition);
+}
+.experience-item strong:not(.experience-meta strong) { /* Target Responsibilities/Achievements headings */
+    display: block;
+    font-weight: 600;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    font-size: 1.1rem;
+    color: var(--text-color);
+     transition: color var(--transition);
+}
+.responsibilities-list,
+.achievements-list {
+    padding-left: 20px;
+    list-style: disc;
+     color: var(--text-light);
+      transition: color var(--transition);
+}
+.responsibilities-list li,
+.achievements-list li {
+    margin-bottom: 0.5em;
+    font-size: 1rem;
+}
+
+/* Education Section */
+.education-list > li { /* Target direct children only */
+    margin-bottom: 2em;
+    font-size: 1.1rem;
+    text-align: left;
+}
+.education-list strong {
+    font-weight: 600;
+    color: var(--text-color);
+     transition: color var(--transition);
+}
+.education-list span {
+    display: block; /* Ensure spans are on new lines */
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-top: 0.2em;
+     transition: color var(--transition);
+}
+.education-list ul { /* Nested list for courses */
+    margin-top: 0.8em;
+    padding-left: 20px;
+    list-style: circle;
+}
+.education-list ul li {
+     margin-bottom: 0.4em;
+     font-size: 1rem;
+}
+
+/* Projects Section - Swiper Carousel */
+.project-swiper {
+  width: 100%;
+  padding-top: 20px; /* Space for title */
+  padding-bottom: 50px; /* Space for pagination */
+}
+.swiper-slide.card {
+  height: auto; /* Let content define height */
+  display: flex;
+  flex-direction: column;
+   text-align: left;
+   background-color: var(--card-bg-color); /* Ensure card background */
+    transition: background-color var(--transition);
+    /* Add min-height if needed for consistency */
+     /* min-height: 250px;  */
+}
+.swiper-slide h3 {
+    margin-bottom: 0.5em;
+}
+.swiper-slide p {
+    font-size: 1rem;
+    color: var(--text-light);
+    flex-grow: 1; /* Allow text to take available space */
+    margin-bottom: 1em;
+     transition: color var(--transition);
+}
+.project-link { /* Optional link style */
+    margin-top: auto; /* Push link to bottom */
+    font-weight: 500;
+    align-self: flex-start;
+}
+
+/* Swiper Navigation/Pagination */
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--primary-color) !important; /* Override default color */
+  transition: color var(--transition);
+}
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: var(--secondary-color) !important;
+}
+.swiper-pagination-bullet {
+  background: var(--text-light) !important;
+   transition: background-color var(--transition);
+}
+.swiper-pagination-bullet-active {
+  background: var(--primary-color) !important;
+}
+
+/* Contact Section */
+.contact-info {
+    max-width: 600px;
+    margin: 0 auto; /* Center contact info */
+    text-align: center;
+}
+.contact-info p {
+    margin-bottom: 1.2em;
+    font-size: 1.1rem;
+}
+.contact-info i { /* Style icons */
+    margin-right: 12px;
+    color: var(--primary-color);
+    width: 20px; /* Ensure consistent icon spacing */
+    text-align: center;
+}
+.preferred-contact {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-left: 8px;
+     transition: color var(--transition);
+}
+
+
+/* Footer */
+.site-footer {
+  background: var(--bg-alt-color);
+  padding: 40px 0; /* Reduced padding */
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  border-top: 1px solid var(--border-color);
+   transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+
+/* Card Style (Used for Experience, Projects) */
+.card {
+  background: var(--card-bg-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 30px;
+  margin-bottom: 20px; /* Consistent card margin */
+   transition: background-color var(--transition), box-shadow var(--transition);
+}
+
+/* Fade-in Animation (Initial State) */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px); /* Slightly less movement */
+}
+/* No transition property here, handled by GSAP */
+
+
+/* Theme Toggle Buttons */
+.theme-toggle, .lang-toggle {
+  position: fixed;
+  top: 18px; /* Align with header center */
+  font-size: 1.3rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001; /* Above header */
+  color: var(--text-light);
+  padding: 5px;
+  transition: color var(--transition), transform var(--transition);
+}
+.theme-toggle:hover, .lang-toggle:hover {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+.theme-toggle { right: 70px; } /* Adjusted spacing */
+.lang-toggle { right: 20px; }
+
+
+/* Dark Mode */
+body.dark-mode {
+  --text-color: #f5f5f7;
+  --text-light: #a0a0a5; /* Lighter gray for dark mode */
+  --bg-color: #1c1c1e;
+  --bg-alt-color: #2c2c2e;
+  --card-bg-color: #2c2c2e; /* Match alt background */
+  --border-color: #3a3a3c; /* Darker border */
+  --shadow: 0 6px 16px rgba(0,0,0,0.2); /* More prominent shadow */
+}
+
+body.dark-mode .site-header {
+  background: rgba(28, 28, 30, 0.85);
+  border-bottom-color: var(--border-color);
+}
+body.dark-mode .site-header.scrolled {
+   background: rgba(28, 28, 30, 0.95);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+body.dark-mode .logo,
+body.dark-mode .main-navigation a {
+  color: var(--text-color);
+}
+
+body.dark-mode .main-navigation a::after {
+  background: var(--primary-color); /* Use primary for consistency */
+}
+
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode .experience-meta strong {
+     color: var(--text-color);
+}
+body.dark-mode h3 { /* Adjust H3 color in dark mode if needed */
+     color: #0a84ff; /* Brighter blue for dark mode accent */
+}
+
+body.dark-mode .cta-button {
+  /* Keep primary as is, secondary needs update */
+}
+body.dark-mode .cta-button.secondary {
+    color: #0a84ff; /* Brighter blue */
+    border-color: #0a84ff;
+}
+ body.dark-mode .cta-button.secondary:hover {
+    background: #0a84ff;
+    color: #1c1c1e; /* Dark text on hover */
+     box-shadow: 0 8px 15px rgba(10, 132, 255, 0.3);
+}
+
+body.dark-mode a {
+    color: #0a84ff; /* Brighter link blue */
+}
+body.dark-mode a:hover {
+    color: #5e9cfc; /* Lighter blue on hover */
+}
+
+body.dark-mode .contact-info i {
+     color: #0a84ff;
+}
+
+body.dark-mode .theme-toggle,
+body.dark-mode .lang-toggle {
+     color: var(--text-light);
+}
+body.dark-mode .theme-toggle:hover,
+body.dark-mode .lang-toggle:hover {
+     color: #0a84ff;
+}
+
+/* Swiper Dark Mode */
+body.dark-mode .swiper-button-next,
+body.dark-mode .swiper-button-prev {
+  color: #0a84ff !important;
+}
+body.dark-mode .swiper-button-next:hover,
+body.dark-mode .swiper-button-prev:hover {
+   color: #5e9cfc !important;
+}
+body.dark-mode .swiper-pagination-bullet {
+  background: var(--text-light) !important;
+}
+body.dark-mode .swiper-pagination-bullet-active {
+  background: #0a84ff !important;
+}
+
+/* Стили для Particles.js */
+.particles-container {
+  position: absolute; /* Изменяем с fixed на absolute */
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1; /* Чтобы был за контентом */
+}
+
+/* Делаем иконки Fancybox белыми в темной теме */
+body.dark-mode .fancybox__toolbar button,
+body.dark-mode .fancybox__nav button {
+  color: #f5f5f7;
+}
+
+/* Стили для анимаций при скроллинге с AOS */
+[data-aos] {
+  pointer-events: none;
+}
+[data-aos].aos-animate {
+  pointer-events: auto;
+}
+
+/* Стили для Typed.js курсора */
+.typed-cursor {
+  opacity: 1;
+  animation: typedjsBlink 0.7s infinite;
+  -webkit-animation: typedjsBlink 0.7s infinite;
+}
+@keyframes typedjsBlink {
+  50% { opacity: 0.0; }
+}
+@-webkit-keyframes typedjsBlink {
+  0% { opacity: 1; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1; }
+}
+
+/* Стили для проектной сетки Masonry (альтернативный вид отображения) */
+.project-grid {
+  width: 100%;
+  margin-top: 2em;
+}
+.grid-sizer,
+.project-item {
+  width: 100%;
+}
+.project-item {
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Медиа-запрос для планшетов */
+@media (min-width: 768px) {
+  .grid-sizer,
+  .project-item {
+    width: calc(50% - 10px);
+  }
+}
+
+/* Медиа-запрос для десктопов */
+@media (min-width: 1024px) {
+  .grid-sizer,
+  .project-item {
+    width: calc(33.333% - 14px);
+  }
+}
+
+/* Дополнительные стили для проектов с Fancybox */
+.project-detail {
+  display: none;
+}
+.fancybox__content {
+  padding: 20px;
+  max-width: 800px;
+  border-radius: var(--radius);
+  background: var(--card-bg-color);
+  color: var(--text-color);
+  transition: background-color var(--transition), color var(--transition);
+}
+.fancybox__content h2 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+.fancybox__content p {
+  margin-bottom: 10px;
+}
+
+/* Стили для эффекта печати заголовка */
+.hero-title-wrapper {
+  min-height: 80px; /* Предотвращает прыжки контента */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px; /* Adjust base font size for smaller screens */
+    }
+    .header-container {
+        padding: 0 15px;
+    }
+    .main-navigation {
+        display: none; /* Hide nav on small screens - Consider a mobile menu solution */
+    }
+    .theme-toggle { right: 60px; }
+    .lang-toggle { right: 15px; }
+    .hero-section {
+        padding: 80px 15px 40px; /* Adjust padding */
+         min-height: auto; /* Allow hero to shrink */
+    }
+     .hero-actions {
+         gap: 10px;
+    }
+     .cta-button {
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
+    .content-section {
+        padding: 60px 0;
+    }
+    h2 {
+        margin-bottom: 1.2em;
+    }
+    .about-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 20px;
+    }
+    .skills-grid {
+        grid-template-columns: 1fr; /* Stack skills */
+        gap: 20px;
+    }
+    .card {
+        padding: 20px;
+    }
+    .project-swiper {
+        padding-bottom: 40px;
+    }
+    /* Hide swiper nav buttons on small screens if too cluttered */
+    /* .swiper-button-next, .swiper-button-prev { display: none; } */
+}
