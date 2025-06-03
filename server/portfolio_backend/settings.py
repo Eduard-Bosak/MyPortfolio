@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
     
     # Wagtail CMS
     'wagtail.contrib.forms',
@@ -89,6 +90,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # Добавлен CORS middleware (важно разместить перед CommonMiddleware)
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -97,7 +99,6 @@ MIDDLEWARE = [
     
     # Wagtail middleware
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # Добавлен CORS middleware (важно разместить перед CommonMiddleware)
 ]
 
 # Настройки CORS
